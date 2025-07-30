@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { SelectMoeda } from "./SelectMoeda";
 
-export function CampoConversao() {
+type Props = {
+  onEnviaValorMoedaCampo: (valor: string, siglaMoeda: string) => void;
+};
+
+export function CampoConversao({onEnviaValorMoedaCampo}: Props) {
 
   const [moeda, setMoeda] = useState("");
+  const [valor, setValor] = useState("");
+
+  useEffect(() => {
+    if (valor) {
+      onEnviaValorMoedaCampo(valor, moeda);
+    }
+  }, [valor, onEnviaValorMoedaCampo]);
 
   const handleRecebeMoeda = (novoMoeda: string) => {
     setMoeda(novoMoeda);
@@ -16,49 +27,26 @@ export function CampoConversao() {
   function transformaValorMascara(valor: string) {
     switch (moeda) {
       case "BRL":
-        return mascaraReal(valor);
+        return colocarMascara('R$ ','pt-BR',valor);
       case "USD":
-        return mascaraDolar(valor); 
+        return colocarMascara('$ ','en-US',valor); 
       case "EUR":
-        return mascaraEuro(valor);
+        return colocarMascara('€ ','de-DE',valor);
       default:
         return valor;
     }
   }
 
-  function mascaraEuro(value: string) {
-    value = value.replace(/\D/g, '')
+  function colocarMascara(prefix: string,tipo: string,value: string) {
+    value = value.replace(/\D/g, '');
     if (!value) return '';
-    value = value.replace('.', '').replace(',', '').replace(/\D/g, '')
-    const options = { minimumFractionDigits: 2 }
-    const result = new Intl.NumberFormat('de-DE', options).format(
+    setValor(value);
+    value = value.replace('.', '').replace(',', '').replace(/\D/g, '');
+    const options = { minimumFractionDigits: 2 };
+    const result = new Intl.NumberFormat(tipo, options).format(
         parseFloat(value) / 100
     )
-    return '€ ' + result
-  }
-
-  function mascaraDolar(value: string) {
-    value = value.replace(/\D/g, '')
-    if (!value) return '';
-    value = value.replace('.', '').replace(',', '').replace(/\D/g, '')
-    const options = { minimumFractionDigits: 2 }
-    const result = new Intl.NumberFormat('en-US', options).format(
-        parseFloat(value) / 100
-    )
-    return '$ ' + result
-  }
-
-  function mascaraReal (value: string) {
-      value = value.replace(/\D/g, '')
-      if (!value) return '';
-      value = value.replace('.', '').replace(',', '').replace(/\D/g, '')
-
-      const options = { minimumFractionDigits: 2 }
-      const result = new Intl.NumberFormat('pt-BR', options).format(
-          parseFloat(value) / 100
-      )
-
-      return 'R$ ' + result
+    return prefix + result;
   }
 
   return (
