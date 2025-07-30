@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import { SelectMoeda } from "./SelectMoeda";
+import { replace } from "react-router";
 
 type Props = {
   onEnviaValorMoedaCampo: (valor: string, siglaMoeda: string) => void;
@@ -38,9 +39,11 @@ export function CampoConversao({onEnviaValorMoedaCampo}: Props) {
   }
 
   function colocarMascara(prefix: string,tipo: string,value: string) {
+    let valorFloat = value;
     value = value.replace(/\D/g, '');
     if (!value) return '';
-    setValor(value);
+    valorFloat = (valorFloat.replace(/[^0-9.,]/g, '').replace(/([.,])(?=.*[.,])/g, '')).replace(',', '.');
+    setValor(valorFloat);
     value = value.replace('.', '').replace(',', '').replace(/\D/g, '');
     const options = { minimumFractionDigits: 2 };
     const result = new Intl.NumberFormat(tipo, options).format(
