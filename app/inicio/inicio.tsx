@@ -18,7 +18,9 @@ export function Inicio() {
             <div className="col-span-2">
               <CampoConversao />
             </div>
-            <div className="col-span-1">X</div>
+            <div className="col-span-1 my-auto">
+              <img src="/image/convert.png" alt="Icone de Conversão" className="h-6 w-6 mx-auto" />
+            </div>
             <div className="col-span-2">
               <CampoConversao />
             </div>
