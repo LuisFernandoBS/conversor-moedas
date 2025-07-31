@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { CampoConversao } from "./components/CampoConversao";
 import { buscarTaxas } from '../services/conversaoService';
+import { ToogleDarkMode } from './components/ToogleDarkMode';
 
 type TaxasCambio = {
   [sigla: string]: number;
@@ -77,16 +78,17 @@ export function Inicio() {
   }
 
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
+    <main className="flex justify-center pt-20 pb-4 h-screen">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
         <header className="flex flex-col items-center gap-9">
+          <ToogleDarkMode />
         </header>
         <div className="max-w-[800px] w-full space-y-3 px-4">
-          <h1 className="text-5xl 2xl:text-8xl font-bold titulo text-center text-green-900">
+          <h1 className="text-5xl 2xl:text-8xl font-bold titulo text-center text-green-900 dark:text-green-400">
             Conversor de Moedas
             <img src="/image/logo.png" alt='logo' className='inline-block h-[64px] w-[64px] ml-2' />
           </h1>
-          <p className="text-center texto-custom font-black">
+          <p className="text-center texto-custom font-black dark:text-gray-400">
             Use este aplicativo para converter valores entre diferentes moedas de forma rápida e fácil.
           </p>
         </div>

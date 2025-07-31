@@ -74,7 +74,7 @@ export function SelectMoeda({ setMoeda, id }: Props) {
             <button
             onClick={() => setAberto(!aberto)}
             type="button"
-            className="w-full rounded-tl-4xl h-[45px] mt-[1px] cursor-pointer rounded-bl-4xl border-r border-gray-500 bg-white pl-3 pr-10 py-2 text-left text-sm shadow-sm focus:outline-none"
+            className="w-full rounded-tl-4xl h-[45px] mt-[1px] cursor-pointer rounded-bl-4xl border-r border-gray-500 bg-white pl-3 pr-10 py-2 text-left text-sm shadow-sm focus:outline-none dark:border-gray-600 dark:bg-gray-900 dark:text-white"
             >
             <div className="flex items-center space-x-3">
                 <img
@@ -100,7 +100,7 @@ export function SelectMoeda({ setMoeda, id }: Props) {
             </button>
 
             {aberto && (
-            <ul className="absolute z-10 mt-1 w-fit min-w-[200px] bg-white border border-gray-300 rounded-md shadow-lg max-h-56 overflow-auto text-sm">
+            <ul className="absolute z-10 mt-1 w-fit min-w-[200px] bg-white border border-gray-300 rounded-md shadow-lg max-h-56 overflow-auto text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white">
                 {moedas.map((moeda) => (
                 <li
                     key={moeda.id}
@@ -111,7 +111,7 @@ export function SelectMoeda({ setMoeda, id }: Props) {
                     onMouseEnter={() => setDestacado(moeda.id)}
                     onMouseLeave={() => setDestacado(null)}
                     className={`cursor-pointer select-none relative py-2 pl-4 pr-9 ${
-                    destacado === moeda.id ? "bg-indigo-600 text-white" : "text-gray-900"
+                    destacado === moeda.id ? "bg-green-600 text-white" : "text-gray-900"
                     }`}
                 >
                     <div className="flex items-center space-x-3">
@@ -121,7 +121,7 @@ export function SelectMoeda({ setMoeda, id }: Props) {
                         className="h-6 w-6 rounded-full"
                     />
                     <span
-                        className={`block truncate ${
+                        className={`block truncate dark:text-white ${
                         selecionado.id === moeda.id ? "font-semibold" : "font-normal"
                         }`}
                     >
@@ -131,7 +131,7 @@ export function SelectMoeda({ setMoeda, id }: Props) {
                     {selecionado.id === moeda.id && (
                     <span
                         className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
-                        destacado === moeda.id ? "text-white" : "text-indigo-600"
+                        destacado === moeda.id ? "text-white" : "text-green-400"
                         }`}
                     >
                         <svg

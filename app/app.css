@@ -5,6 +5,8 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: 'TituloCustom';
   src: url('../fonts/Inter-Bold.ttf') format('truetype');
@@ -25,6 +27,10 @@ body {
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
+  }
+
+  *{
+    transition: all 0.5s ease-in-out;
   }
 }
 

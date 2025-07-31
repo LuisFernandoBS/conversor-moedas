@@ -68,7 +68,7 @@ export function CampoConversao({setValor, setMoeda, id, moeda, valorInput, desab
       <input
         id={`campo-conversao-${id}`}
         type="text"
-        className="mt-0.5 w-full h-[48px] pr-3 pl-[198px] rounded-4xl border-1 border-gray-500 shadow-sm text-right sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white focus:border-green-600 focus:outline-0 disabled:bg-gray-300 disabled:cursor-normal"
+        className="mt-0.5 w-full h-[48px] pr-3 pl-[198px] rounded-4xl border-1 border-gray-500 shadow-sm text-right sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white focus:border-green-600 focus:outline-0 disabled:bg-neutral-300 disabled:dark:bg-gray-800 disabled:cursor-normal"
         placeholder="0,00"
         disabled={desabilitarInput}
         onInput={(e) => {
