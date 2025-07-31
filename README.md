@@ -1,87 +1,92 @@
-# Welcome to React Router!
+# 💱 Conversor de Moedas React
 
-A modern, production-ready template for building full-stack React applications using React Router.
+> **Projeto demonstrativo de habilidades**, desenvolvido em 2 dias apenas, com foco em React, consumo de API, responsividade e dark mode.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+Projeto de conversor de moedas desenvolvido com React, utilizando React Router para navegação, Tailwind CSS para estilização e responsividade. O app consome uma API externa para obter taxas de câmbio atualizadas.
 
 ---
 
-Built with ❤️ using React Router.
+## 🛠️ Tecnologias Utilizadas
+
+- ⚛️ **React** (com React Router para rotas e navegação)
+- 🎨 **Tailwind CSS** para estilo e design responsivo
+- 🌐 **Fetch API** para consumo de dados externos
+- 🔐 Arquivo `.env` para armazenamento seguro da chave da API
+- 🧩 Arquitetura modular com services para separação das requisições
+- 📘 **TypeScript** (se aplicável) para tipagem estática
+- 🌙 Dark Mode com toggle e persistência da preferência no `localStorage`
+
+---
+
+## 🚀 Funcionalidades
+
+- Conversão entre 6 moedas disponíveis:
+  - Real (BRL)
+  - Dólar (USD)
+  - Euro (EUR)
+  - Peso Argentino (ARS)
+  - Iene Japonês (JPY)
+  - Franco Suíço (CHF)
+- Consumo de API externa para obtenção das taxas de câmbio atualizadas
+- Utilização de `fetch` para requisições HTTP separadas em service dedicado
+- Armazenamento da chave da API em variável de ambiente para segurança
+- Componentização clara e reutilizável dos campos de conversão
+- Responsividade avançada para desktop, tablets e dispositivos mobile
+- Toggle de modo escuro (dark mode) integrado
+- Persistência da escolha do usuário para modo claro/escuro usando `localStorage`
+- Otimização da performance e experiência do usuário
+
+---
+
+## 📦 Como rodar o projeto localmente
+
+1. Clone o repositório
+   ```bash
+   git clone https://github.com/seu-usuario/conversor-moedas-react.git
+   ```
+
+2.Instale as dependências
+
+```
+  npm install # ou
+  yarn install
+```
+
+3.Crie um arquivo .env na raiz do projeto com a chave da API:
+
+```
+  VITE_EXCHANGE_RATE_API_KEY=SUA_CHAVE_AQUI
+```
+
+4.Rode o projeto
+
+```
+  npm run dev # ou
+  yarn dev
+```
+
+5.Acesse no navegador:
+
+```
+  http://localhost:5173 (ou a porta indicada pelo terminal)
+```
+
+---
+
+## 💡 Considerações Finais
+
+Este projeto serve como base para apps de conversão e exemplos práticos com React, mostrando boas práticas como:
+
+Separação clara de responsabilidades
+
+Uso de variáveis de ambiente para segredos
+
+Componentização e hooks customizados
+
+Estilização responsiva com Tailwind
+
+Consumo de API de forma assíncrona e segura
+
+Suporte a dark mode com persistência da preferência do usuário
+
+Por ser um projeto feito em 2 dias, seu objetivo principal é demonstrar habilidades técnicas e boas práticas.
