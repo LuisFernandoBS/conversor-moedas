@@ -53,7 +53,7 @@ export function SelectMoeda({ setMoeda }: Props) {
             <button
             onClick={() => setAberto(!aberto)}
             type="button"
-            className="w-full rounded-tl-4xl h-[45px] cursor-pointer rounded-bl-4xl border-r border-gray-500 bg-white pl-3 pr-10 py-2 text-left text-sm shadow-sm focus:outline-none"
+            className="w-full rounded-tl-4xl h-[45px] mt-[1px] cursor-pointer rounded-bl-4xl border-r border-gray-500 bg-white pl-3 pr-10 py-2 text-left text-sm shadow-sm focus:outline-none"
             >
             <div className="flex items-center space-x-3">
                 <img
