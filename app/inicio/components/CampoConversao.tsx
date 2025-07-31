@@ -7,9 +7,10 @@ type Props = {
   moeda: string;
   valorInput: string;
   id: string;
+  desabilitarInput?: boolean;
 };
 
-export function CampoConversao({setValor, setMoeda, id, moeda, valorInput}: Props) {
+export function CampoConversao({setValor, setMoeda, id, moeda, valorInput, desabilitarInput = false}: Props) {
   
   useEffect(() => {
     const input = document.querySelector('#campo-conversao-' + id) as HTMLInputElement;
@@ -46,14 +47,14 @@ export function CampoConversao({setValor, setMoeda, id, moeda, valorInput}: Prop
     const result = new Intl.NumberFormat(tipo, options).format(
         parseFloat(value) / 100
     )
-    setValor(prefix + result);
+    setValor(result);
     return prefix + result;
   }
 
   return (
     <div className="relative">
       <span
-        className="absolute rounded-4xl inset-y-0 left-1 grid w-fit place-content-center text-gray-700 dark:text-gray-200"
+        className="absolute rounded-4xl inset-y-0 left-[2px] grid w-fit place-content-center text-gray-700 dark:text-gray-200"
       >
         <SelectMoeda setMoeda={setMoeda}/>
       </span>
@@ -61,8 +62,9 @@ export function CampoConversao({setValor, setMoeda, id, moeda, valorInput}: Prop
       <input
         id={`campo-conversao-${id}`}
         type="text"
-        className="mt-0.5 w-full h-[48px] pr-3 rounded-4xl border-1 border-gray-500 shadow-sm text-right sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white focus:border-green-600 focus:outline-0"
+        className="mt-0.5 w-full h-[48px] pr-3 rounded-4xl border-1 border-gray-500 shadow-sm text-right sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white focus:border-green-600 focus:outline-0 disabled:bg-gray-300 disabled:cursor-normal"
         placeholder="0,00"
+        disabled={desabilitarInput}
         onInput={(e) => {
           const target = e.target as HTMLInputElement;
           target.value = transformaValorMascara(target.value);

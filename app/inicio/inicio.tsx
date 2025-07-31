@@ -23,16 +23,21 @@ export function Inicio() {
   
   const [animacao, setAnimacao] = useState(false);
 
+  useEffect(()=>{
+    if(valorCampo1) {
+      consultarTaxasCambio(moedaCampo1, 1);
+    }
+  },[valorCampo1, moedaCampo1]);
 
   useEffect(()=>{
-    if(valorCampo1 || valorCampo2) {
-      consultarTaxasCambio(moedaCampo1);
+    if(valorCampo1) {
+      consultarTaxasCambio(moedaCampo2, 2);
     }
-  },[valorCampo1, valorCampo2, moedaCampo1, moedaCampo2]);
+  },[moedaCampo2]);
   
   function calcularConversao() {
     const valorFloat = (valorCampo1.replace(/[^0-9.,]/g, '').replace(/([.,])(?=.*[.,])/g, '')).replace(',', '.');
-    const taxa = listaTaxasConsultadas.filter(taxa => taxa.sigla === siglaUltTaxa);
+    const taxa = listaTaxasConsultadas.filter(taxa => taxa.sigla === moedaCampo1);
     if(taxa.length > 0){
       const valorConvertido = parseFloat(valorFloat) * taxa[0].taxas[moedaCampo2];
       setValorCampo2(valorConvertido.toFixed(2));
@@ -40,7 +45,7 @@ export function Inicio() {
     }
   }
 
-  async function consultarTaxasCambio(moedaBase: string) {
+  async function consultarTaxasCambio(moedaBase: string, campo: number) {
     const taxasExistem = listaTaxasConsultadas.find(item => item.sigla === moedaBase);
         
     if(taxasExistem){
@@ -95,7 +100,7 @@ export function Inicio() {
               <img src="/image/convert.png" alt="Icone de Conversão" className={`h-6 w-6 mx-auto ${animacao && 'animacao-rotacao'}`} />
             </div>
             <div className="col-span-5 px-5 md:col-span-2">
-              <CampoConversao id="2" moeda={moedaCampo2} valorInput={valorCampo2} setMoeda={setMoedaCampo2} setValor={setValorCampo2} />
+              <CampoConversao id="2" moeda={moedaCampo2} valorInput={valorCampo2} setMoeda={setMoedaCampo2} setValor={setValorCampo2} desabilitarInput={true} />
             </div>
         </div>
         
