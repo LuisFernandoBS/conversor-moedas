@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 type Props = {
   setMoeda: (valor: string) => void;
+  id:string;
 };
 
 interface Moeda {
@@ -30,9 +31,27 @@ const moedas: Moeda[] = [
     sigla: "EUR",
     imagem: "/image/euro.png"
   },
+  {
+    id: 4,
+    nome: "Peso Argentino",
+    sigla: "ARS",
+    imagem: "/image/argentina.png"
+  },
+  {
+    id: 5,
+    nome: "Iene Japonês",
+    sigla: "JPY",
+    imagem: "/image/japan.png"
+  },
+  {
+    id: 6,
+    nome: "Franco Suíço",
+    sigla: "CHF",
+    imagem: "/image/suica.png"
+  },
 ];
 
-export function SelectMoeda({ setMoeda }: Props) {
+export function SelectMoeda({ setMoeda, id }: Props) {
     const [aberto, setAberto] = useState(false);
     const [selecionado, setSelecionado] = useState<Moeda>(moedas[0]);
     const [destacado, setDestacado] = useState<number | null>(null);
@@ -40,7 +59,9 @@ export function SelectMoeda({ setMoeda }: Props) {
     
     useEffect(() => {
         if (setInicial) return;
-        setMoeda(moedas[0].sigla);
+        let moeda = id === "1" ? moedas[0] : moedas[1];
+        setSelecionado(moeda);
+        setMoeda(moeda.sigla);
         setInicial = true;
     }, []);
 
@@ -79,7 +100,7 @@ export function SelectMoeda({ setMoeda }: Props) {
             </button>
 
             {aberto && (
-            <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-56 overflow-auto text-sm">
+            <ul className="absolute z-10 mt-1 w-fit min-w-[200px] bg-white border border-gray-300 rounded-md shadow-lg max-h-56 overflow-auto text-sm">
                 {moedas.map((moeda) => (
                 <li
                     key={moeda.id}

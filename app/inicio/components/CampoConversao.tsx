@@ -34,6 +34,12 @@ export function CampoConversao({setValor, setMoeda, id, moeda, valorInput, desab
         return colocarMascara('$ ','en-US',valor); 
       case "EUR":
         return colocarMascara('€ ','de-DE',valor);
+      case "ARS":
+        return colocarMascara('', 'es-AR', valor);
+      case "JPY":
+        return colocarMascara('¥ ', 'ja-JP', valor);
+      case "CHF":
+        return colocarMascara('CHF ', 'de-CH', valor);
       default:
         return valor;
     }
@@ -56,13 +62,13 @@ export function CampoConversao({setValor, setMoeda, id, moeda, valorInput, desab
       <span
         className="absolute rounded-4xl inset-y-0 left-[2px] grid w-fit place-content-center text-gray-700 dark:text-gray-200"
       >
-        <SelectMoeda setMoeda={setMoeda}/>
+        <SelectMoeda setMoeda={setMoeda} id={id}/>
       </span>
 
       <input
         id={`campo-conversao-${id}`}
         type="text"
-        className="mt-0.5 w-full h-[48px] pr-3 rounded-4xl border-1 border-gray-500 shadow-sm text-right sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white focus:border-green-600 focus:outline-0 disabled:bg-gray-300 disabled:cursor-normal"
+        className="mt-0.5 w-full h-[48px] pr-3 pl-[198px] rounded-4xl border-1 border-gray-500 shadow-sm text-right sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white focus:border-green-600 focus:outline-0 disabled:bg-gray-300 disabled:cursor-normal"
         placeholder="0,00"
         disabled={desabilitarInput}
         onInput={(e) => {
