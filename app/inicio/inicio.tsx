@@ -19,7 +19,6 @@ export function Inicio() {
   const [moedaCampo2, setMoedaCampo2] = useState("");
 
   const [listaTaxasConsultadas, setListaTaxasConsultadas] = useState<ArrayTaxasCambio[]>([]);
-  const [siglaUltTaxa, setSiglaUltTaxa] = useState('');
   
   const [animacao, setAnimacao] = useState(false);
 
@@ -52,7 +51,6 @@ export function Inicio() {
         const diffHoras = (Date.now() -  Number(taxasExistem?.horarioConsulta)) / (1000 * 60 * 60);
         if (diffHoras <= 1) {
             calcularConversao();
-            setSiglaUltTaxa(moedaBase);
             return;
         }
     }
@@ -63,7 +61,6 @@ export function Inicio() {
         taxas: data.conversion_rates,
         horarioConsulta: Date.now().toString()
       };
-      setSiglaUltTaxa(moedaBase);
       setListaTaxasConsultadas(prev => [...prev, novasTaxas]);
       calcularConversao();
     })
