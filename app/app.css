@@ -21,7 +21,7 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-[#E8F0EC] dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
@@ -34,12 +34,10 @@ body {
 
 .titulo {
   font-family: 'TituloCustom', sans-serif;
-  font-size: 2rem;
 }
 
 .texto-custom {
   font-family: 'TextoCustom', sans-serif;
-  font-size: 1rem;
 }
 
 @keyframes rotacao {
