@@ -82,21 +82,22 @@ export function Inicio() {
         <header className="flex flex-col items-center gap-9">
         </header>
         <div className="max-w-[800px] w-full space-y-3 px-4">
-          <h1 className="text-2xl font-bold titulo text-center text-green-900">
+          <h1 className="text-5xl 2xl:text-8xl font-bold titulo text-center text-green-900">
             Conversor de Moedas
+            <img src="/image/logo.png" alt='logo' className='inline-block h-[64px] w-[64px] ml-2' />
           </h1>
           <p className="text-center texto-custom font-black">
             Use este aplicativo para converter valores entre diferentes moedas de forma rápida e fácil.
           </p>
         </div>
-        <div className="grid grid-cols-5 w-full max-w-[800px] gap-4">
-            <div className="col-span-5 px-5 md:col-span-2">
+        <div className="grid grid-cols-9 w-full max-w-[1000px] gap-4">
+            <div className="col-span-9 px-5 md:col-span-4">
               <CampoConversao id="1" moeda={moedaCampo1} valorInput={valorCampo1} setMoeda={setMoedaCampo1} setValor={setValorCampo1} />
             </div>
-            <div className="col-span-5 md:col-span-1 my-auto">
+            <div className="col-span-9 md:col-span-1 my-auto">
               <img src="/image/convert.png" alt="Icone de Conversão" className={`h-6 w-6 mx-auto ${animacao && 'animacao-rotacao'}`} />
             </div>
-            <div className="col-span-5 px-5 md:col-span-2">
+            <div className="col-span-9 px-5 md:col-span-4">
               <CampoConversao id="2" moeda={moedaCampo2} valorInput={valorCampo2} setMoeda={setMoedaCampo2} setValor={setValorCampo2} desabilitarInput={true} />
             </div>
         </div>
