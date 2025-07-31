@@ -85,10 +85,10 @@ export function Inicio() {
         <header className="flex flex-col items-center gap-9">
         </header>
         <div className="max-w-[800px] w-full space-y-3 px-4">
-          <h1 className="text-2xl font-bold text-center">
-            Bem-vindo ao Conversor de Moedas
+          <h1 className="text-2xl font-bold titulo text-center text-green-900">
+            Conversor de Moedas
           </h1>
-          <p className="text-center">
+          <p className="text-center texto-custom font-black">
             Use este aplicativo para converter valores entre diferentes moedas de forma rápida e fácil.
           </p>
         </div>

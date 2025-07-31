@@ -5,6 +5,20 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+@font-face {
+  font-family: 'TituloCustom';
+  src: url('../fonts/Inter-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TextoCustom';
+  src: url('../fonts/Playfair-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   @apply bg-white dark:bg-gray-950;
@@ -16,6 +30,16 @@ body {
 
 .animacao-rotacao {
   animation: rotacao 1s ease forwards;
+}
+
+.titulo {
+  font-family: 'TituloCustom', sans-serif;
+  font-size: 2rem;
+}
+
+.texto-custom {
+  font-family: 'TextoCustom', sans-serif;
+  font-size: 1rem;
 }
 
 @keyframes rotacao {
