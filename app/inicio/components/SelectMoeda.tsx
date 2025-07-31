@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 type Props = {
-  onEnviarMoeda: (valor: string) => void;
+  setMoeda: (valor: string) => void;
 };
 
 interface Moeda {
@@ -32,14 +32,21 @@ const moedas: Moeda[] = [
   },
 ];
 
-export function SelectMoeda({ onEnviarMoeda }: Props) {
+export function SelectMoeda({ setMoeda }: Props) {
     const [aberto, setAberto] = useState(false);
     const [selecionado, setSelecionado] = useState<Moeda>(moedas[0]);
     const [destacado, setDestacado] = useState<number | null>(null);
+    let setInicial = false;
+    
+    useEffect(() => {
+        if (setInicial) return;
+        setMoeda(moedas[0].sigla);
+        setInicial = true;
+    }, []);
 
     useEffect(() => {
-        onEnviarMoeda(selecionado.sigla);
-    }, [selecionado, onEnviarMoeda]);
+        setMoeda(selecionado.sigla);
+    }, [selecionado, setMoeda]);
 
     return (
         <div className="relative">

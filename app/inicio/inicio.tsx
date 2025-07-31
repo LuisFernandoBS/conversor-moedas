@@ -8,7 +8,7 @@ type TaxasCambio = {
 
 type ArrayTaxasCambio = {
   sigla: string;  
-  taxas: TaxasCambio[];
+  taxas: TaxasCambio;
   horarioConsulta:string;
 }
 
@@ -19,26 +19,22 @@ export function Inicio() {
   const [moedaCampo2, setMoedaCampo2] = useState("");
 
   const [listaTaxasConsultadas, setListaTaxasConsultadas] = useState<ArrayTaxasCambio[]>([]);
-  const [taxas, setTaxas] = useState({});
+  const [siglaUltTaxa, setSiglaUltTaxa] = useState('');
 
-
-  function handlerValorCampo1(valor: string, siglaMoeda: string) {
-    consultarTaxasCambio(siglaMoeda);
-    setValorCampo1(valor);
-    setMoedaCampo1(siglaMoeda);
-  }
-  
-  function handlerValorCampo2(valor: string, siglaMoeda: string) {
-    consultarTaxasCambio(siglaMoeda);
-    setValorCampo2(valor);
-    setMoedaCampo2(siglaMoeda);
-  }
-
-  useEffect(() => {
-    if (valorCampo1 || valorCampo2) {
-      console.log(`Valor Campo 1: ${valorCampo1}, Valor Campo 2: ${valorCampo2}`);
+  useEffect(()=>{
+    if(valorCampo1 || valorCampo2) {
+      consultarTaxasCambio(moedaCampo1);
     }
-  }, [valorCampo1, valorCampo2]);
+  },[valorCampo1, valorCampo2, moedaCampo1, moedaCampo2]);
+  
+  function calcularConversao() {
+    const valorFloat = (valorCampo1.replace(/[^0-9.,]/g, '').replace(/([.,])(?=.*[.,])/g, '')).replace(',', '.');
+    const taxa = listaTaxasConsultadas.filter(taxa => taxa.sigla === siglaUltTaxa);
+    if(taxa.length > 0){
+      const valorConvertido = parseFloat(valorFloat) * taxa[0].taxas[moedaCampo2];
+      setValorCampo2(valorConvertido.toFixed(2));
+    }
+  }
 
   async function consultarTaxasCambio(moedaBase: string) {
     const taxasExistem = listaTaxasConsultadas.find(item => item.sigla === moedaBase);
@@ -46,19 +42,21 @@ export function Inicio() {
     if(taxasExistem){
         const diffHoras = (Date.now() -  Number(taxasExistem?.horarioConsulta)) / (1000 * 60 * 60);
         if (diffHoras <= 1) {
-            setTaxas(taxasExistem.taxas);
+            calcularConversao();
+            setSiglaUltTaxa(moedaBase);
             return;
         }
     }
 
     buscarTaxas(moedaBase).then(data => {
-        const novasTaxas = {
-            sigla: moedaBase,
-            taxas: data.conversion_rates,
-            horarioConsulta: Date.now().toString()
-          };
-          setListaTaxasConsultadas(prev => [...prev, novasTaxas]);
-          setTaxas(data.conversion_rates);
+      const novasTaxas = {
+        sigla: moedaBase,
+        taxas: data.conversion_rates,
+        horarioConsulta: Date.now().toString()
+      };
+      setSiglaUltTaxa(moedaBase);
+      setListaTaxasConsultadas(prev => [...prev, novasTaxas]);
+      calcularConversao();
     })
     .catch(err => {
         console.error(err);
@@ -80,13 +78,13 @@ export function Inicio() {
         </div>
         <div className="grid grid-cols-5 w-full max-w-[800px] gap-4">
             <div className="col-span-2">
-              <CampoConversao onEnviaValorMoedaCampo={handlerValorCampo1} />
+              <CampoConversao id="1" moeda={moedaCampo1} valorInput={valorCampo1} setMoeda={setMoedaCampo1} setValor={setValorCampo1} />
             </div>
             <div className="col-span-1 my-auto">
               <img src="/image/convert.png" alt="Icone de Conversão" className="h-6 w-6 mx-auto" />
             </div>
             <div className="col-span-2">
-              <CampoConversao onEnviaValorMoedaCampo={handlerValorCampo2}/>
+              <CampoConversao id="2" moeda={moedaCampo2} valorInput={valorCampo2} setMoeda={setMoedaCampo2} setValor={setValorCampo2} />
             </div>
         </div>
         
